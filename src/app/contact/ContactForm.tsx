@@ -17,9 +17,9 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-type Status = "idle" | "loading" | "success" | "error";
+type Status = "idle" | "loading" | "success" | "error" | "rate-limited";
 
-export function ContactForm() {
+export function ContactForm({ endpoint }: { endpoint: string }) {
   const [status, setStatus] = useState<Status>("idle");
 
   const {
@@ -34,11 +34,16 @@ export function ContactForm() {
   const onSubmit = async (data: FormData) => {
     setStatus("loading");
     try {
-      // Simulate network request - replace with actual API endpoint
-      await new Promise((resolve) => setTimeout(resolve, 1800));
-      // NOTE: No actual form submission is configured. 
-      // Integrate with an email provider (Resend, SendGrid, or Formspree) to enable real submissions.
-      console.log("Form data (demo only):", data);
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { Accept: "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        signal: AbortSignal.timeout(15_000),
+      });
+      if (!response.ok) {
+        setStatus(response.status === 429 ? "rate-limited" : "error");
+        return;
+      }
       setStatus("success");
       reset();
     } catch {
@@ -61,7 +66,7 @@ export function ContactForm() {
           Message Sent Successfully!
         </h3>
         <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
-          Thank you for reaching out to AQUABOR. Our team will review your inquiry and respond within 1–2 business days.
+          Thank you for reaching out to AQUABOR. Our team will review your inquiry.
         </p>
         <button
           onClick={() => setStatus("idle")}
@@ -76,6 +81,8 @@ export function ContactForm() {
 
   return (
     <form
+      action={endpoint}
+      method="post"
       onSubmit={handleSubmit(onSubmit)}
       noValidate
       className="space-y-5"
@@ -84,7 +91,7 @@ export function ContactForm() {
     >
       {/* Status Error */}
       <AnimatePresence>
-        {status === "error" && (
+        {(status === "error" || status === "rate-limited") && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -96,23 +103,13 @@ export function ContactForm() {
           >
             <AlertCircle size={18} className="text-red-500 flex-shrink-0 mt-0.5" />
             <p className="text-red-700 text-sm">
-              Something went wrong. Please try again or contact us directly.
+              {status === "rate-limited"
+                ? "Too many requests. Please wait a minute and try again."
+                : "We couldn't confirm your submission. Please try again or contact us directly."}
             </p>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Demo notice */}
-      <div
-        className="rounded-xl p-3 flex items-start gap-3"
-        style={{ background: "rgba(255,165,0,0.08)", border: "1px solid rgba(255,165,0,0.2)" }}
-        role="note"
-      >
-        <span className="text-base">ℹ️</span>
-        <p className="text-xs" style={{ color: "#b45309" }}>
-          Form submission is in demo mode. An email integration (e.g. Resend or Formspree) must be configured to receive actual messages.
-        </p>
-      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Full Name */}

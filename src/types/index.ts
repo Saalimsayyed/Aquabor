@@ -7,6 +7,7 @@ export interface Service {
   shortDescription: string;
   description: string;
   image: string;
+  imageAlt: string;
   icon: string;
   benefits: string[];
   applications: string[];
@@ -35,6 +36,7 @@ export interface Equipment {
   name: string;
   description: string;
   image: string;
+  imageAlt: string;
   features: string[];
 }
 

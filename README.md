@@ -31,6 +31,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
+Set these environment variables before running the production build. Use verified business contact details.
+
+| Variable | Value |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | The canonical HTTPS URL for the deployed site. |
+| `NEXT_PUBLIC_FORMSPREE_FORM_ID` | The ID from the Formspree form configured for the enquiry inbox. |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | The public enquiry email address. |
+| `NEXT_PUBLIC_CONTACT_PHONE` | The phone number in international format, starting with `+`, without spaces. |
+| `NEXT_PUBLIC_CONTACT_WHATSAPP` | The WhatsApp number in the same international format. |
+| `NEXT_PUBLIC_CONTACT_ADDRESS` | The public office address, if published. |
+
+The corresponding contact links and form appear when configured. Set up at least one enquiry channel before launch. If using Formspree, confirm that a test enquiry reaches the intended inbox.
+
+Use Node.js 22.13 or later on the Node.js 22 release line, or Node.js 24 LTS. Run `npm ci`, `npm run lint`, and `npm run build`. To preview the production build locally, run `npm run start`.
+
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -4,12 +4,13 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Play } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 const trustBadges = [
   "Licensed & Insured",
   "UAE Compliant",
-  "24/7 Support",
+  "Fast Response",
+  "Experienced Crew",
 ];
 
 type FloatingDot = {
@@ -33,14 +34,14 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      aria-label="Aquabor Water Well Drilling"
+      aria-label="Aquabor Drilling Contractor UAE"
       className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#071B2D]"
     >
       {/* Background */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=85"
-          alt="Professional water well drilling equipment"
+          src="/images/water-well-drilling-rig-uae.webp"
+          alt="Truck-mounted water well drilling rig with a compressor truck"
           fill
           priority
           sizes="100vw"
@@ -129,7 +130,7 @@ export function HeroSection() {
                 borderColor: "rgba(0,184,217,0.3)",
               }}
             >
-              Dubai's Premier Drilling Company
+              Dubai&apos;s Trusted Drilling Contractor
             </span>
           </motion.div>
 
@@ -138,9 +139,9 @@ export function HeroSection() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.7 }}
-            className="mb-5 text-[clamp(2.25rem,7vw,4.5rem)] font-black leading-[1.08] tracking-tight text-white sm:mb-6"
+            className="mb-5 text-[clamp(2rem,6vw,4rem)] font-black leading-[1.08] tracking-tight text-white sm:mb-6"
           >
-            Reliable Water Well{" "}
+            Drilling Contractor in Dubai &amp; UAE{" "}
             <span
               className="block"
               style={{
@@ -151,7 +152,7 @@ export function HeroSection() {
                 backgroundClip: "text",
               }}
             >
-              Drilling Solutions
+              for Water Wells, Earthing and Core Cutting
             </span>
           </motion.h1>
 
@@ -160,11 +161,18 @@ export function HeroSection() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
-            className="mb-8 max-w-2xl text-sm leading-7 text-white/75 sm:mb-10 sm:text-lg sm:leading-8 lg:text-xl"
+            className="mb-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-lg sm:leading-8 lg:text-xl"
           >
-            Delivering professional water well drilling, borehole
-            construction and groundwater solutions with precision,
-            innovation and reliability across Dubai and the GCC region.
+            AQUABOR is a drilling contractor in the UAE. We provide water well drilling, borewell drilling, electrical earthing, core cutting and dewatering services for villas, farms, factories, substations and construction sites.
+          </motion.p>
+
+          <motion.p
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.38, duration: 0.7 }}
+            className="mb-8 max-w-2xl text-sm leading-7 text-white/60 sm:mb-10 sm:text-base sm:leading-7"
+          >
+            Our team is experienced, our machines are ready, and our work is safe, clean and on time.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -188,7 +196,6 @@ export function HeroSection() {
               id="hero-cta-services"
               className="btn btn-outline flex w-full items-center justify-center gap-3 px-6 py-4 text-sm sm:w-auto sm:px-8 sm:text-base"
             >
-              <Play size={16} fill="currentColor" />
               Explore Our Services
             </Link>
           </motion.div>

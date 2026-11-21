@@ -5,7 +5,7 @@ import { projects } from "@/data/projects";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
 
-const previewProjects = projects.slice(0, 3);
+const previewProjects = projects.slice(0, 4);
 
 export function ProjectsSection() {
   return (
@@ -17,11 +17,11 @@ export function ProjectsSection() {
       <div className="container">
         <SectionHeader
           label="Our Projects"
-          title="Delivering Groundwater Solutions Across the UAE"
-          subtitle="Explore representative projects demonstrating AQUABOR's capabilities in water well drilling and groundwater solutions."
+          title="Project Examples in Dubai & UAE"
+          subtitle="Explore representative examples of the services AQUABOR offers."
         />
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-7">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {previewProjects.map((project) => (
             <StaggerItem key={project.id}>
               <Link
@@ -35,7 +35,7 @@ export function ProjectsSection() {
                   alt={`${project.title} – ${project.category} project in UAE`}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
                 <div className="project-overlay">
                   <div>
@@ -49,7 +49,7 @@ export function ProjectsSection() {
                     >
                       {project.category}
                     </span>
-                    <h3 className="text-white font-bold text-lg leading-snug mb-2">
+                    <h3 className="text-white font-bold text-base leading-snug mb-2">
                       {project.title}
                     </h3>
                     <div className="flex items-center gap-1.5 text-white/60 text-xs mb-3">
@@ -64,19 +64,6 @@ export function ProjectsSection() {
                       <ArrowRight size={13} />
                     </span>
                   </div>
-                </div>
-
-                {/* Demo label */}
-                <div className="absolute top-4 right-4">
-                  <span
-                    className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase"
-                    style={{
-                      background: "rgba(255,165,0,0.85)",
-                      color: "white",
-                    }}
-                  >
-                    Demo
-                  </span>
                 </div>
               </Link>
             </StaggerItem>

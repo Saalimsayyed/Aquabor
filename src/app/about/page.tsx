@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { CheckCircle2, Target, Eye, Droplets } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
@@ -8,12 +8,12 @@ import { CTASection } from "@/components/sections/CTASection";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
 
-export const metadata: Metadata = {
-  title: "About AQUABOR – Water Well Drilling Company in Dubai, UAE",
+export const metadata = createPageMetadata({
+  path: "/about",
+  title: "About Our Dubai Drilling Company",
   description:
-    "Learn about AQUABOR, Dubai's professional water well drilling and groundwater solutions company. Discover our mission, approach, expertise and commitment to quality.",
-  alternates: { canonical: "/about" },
-};
+    "Meet AQUABOR, a Dubai-based contractor for water well drilling, electrical earthing, concrete core cutting and dewatering across the UAE.",
+});
 
 const expertise = [
   "Water Well Drilling & Construction",
@@ -51,7 +51,7 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-white/65 text-lg max-w-2xl leading-relaxed">
-              Dubai's professional water well drilling and groundwater solutions company, delivering precision, reliability and expertise across the UAE and GCC region.
+              AQUABOR is a Dubai-based contractor for water well drilling, electrical earthing, core cutting and dewatering across the UAE.
             </p>
           </FadeIn>
         </div>
@@ -64,8 +64,8 @@ export default function AboutPage() {
             <FadeIn direction="right">
               <div className="relative rounded-2xl overflow-hidden img-zoom shadow-2xl aspect-[4/3]">
                 <Image
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85"
-                  alt="AQUABOR water well drilling operations in Dubai"
+                  src="/images/water-well-drilling-rig-uae.webp"
+                  alt="Truck-mounted water well drilling rig beside a compressor truck"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -79,10 +79,10 @@ export default function AboutPage() {
               </h2>
               <div className="divider" />
               <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
-                AQUABOR is a premier water well drilling and borehole construction company based in Dubai, UAE. We serve clients across the UAE and GCC region, providing expert groundwater solutions for residential, commercial, agricultural and industrial projects.
+                We drill water wells and boreholes for residential, commercial, agricultural and industrial sites. We also install and test earthing systems, core-drill concrete openings for building services and help manage groundwater at excavations.
               </p>
               <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
-                Our team combines extensive drilling expertise with a deep understanding of UAE's geological and regulatory environment, ensuring every project is executed with precision, compliance and reliability.
+                Our team combines extensive drilling expertise with a deep understanding of UAE&apos;s geological and regulatory environment, ensuring every project is executed with precision, compliance and reliability.
               </p>
               <p className="text-[var(--text-secondary)] leading-relaxed mb-7">
                 At AQUABOR, we believe that access to reliable groundwater is a fundamental requirement for sustainable development in the UAE. Our mission is to make that access a reality for every client we serve.
@@ -121,7 +121,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Our Mission</h3>
                 <p className="text-white/80 leading-relaxed text-sm">
-                  To deliver professional, reliable and technically excellent water well drilling and groundwater solutions that meet the highest standards of quality, safety and regulatory compliance, providing long-term value to every client we serve across Dubai and the GCC region.
+                  To deliver professional, reliable and technically excellent water well drilling and groundwater solutions that meet the highest standards of quality, safety and regulatory compliance, providing long-term value to every client we serve in Dubai and across the UAE.
                 </p>
               </div>
             </FadeIn>
@@ -143,7 +143,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Our Vision</h3>
                 <p className="text-white/80 leading-relaxed text-sm">
-                  To be the leading water well drilling and groundwater solutions company in the UAE and GCC region, recognized for technical excellence, innovative practices and an unwavering commitment to client satisfaction and sustainable water resource management.
+                  To be the leading water well drilling and groundwater solutions company in the UAE, recognized for technical excellence, innovative practices and an unwavering commitment to client satisfaction and sustainable water resource management.
                 </p>
               </div>
             </FadeIn>
@@ -182,8 +182,8 @@ export default function AboutPage() {
             <FadeIn direction="left">
               <div className="relative rounded-2xl overflow-hidden img-zoom shadow-xl aspect-[4/3]">
                 <Image
-                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=85"
-                  alt="AQUABOR technical drilling expertise and capabilities"
+                  src="/images/earthing-drilling-excavator-uae.webp"
+                  alt="Excavator-mounted auger beside an excavation"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"

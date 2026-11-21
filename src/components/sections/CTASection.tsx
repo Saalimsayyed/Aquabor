@@ -1,4 +1,5 @@
-import { ArrowRight, Phone } from "lucide-react";
+import { contact } from "@/lib/contact";
+import { ArrowRight, Phone, MessageCircle } from "lucide-react";
 import { FadeIn } from "@/components/animations/FadeIn";
 import Link from "next/link";
 
@@ -53,10 +54,10 @@ export function CTASection() {
             className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-5 max-w-3xl mx-auto"
             style={{ letterSpacing: "-0.025em" }}
           >
-            Looking for Reliable Water Well Drilling Services?
+            Need a Drilling Contractor in UAE? Talk to AQUABOR Today
           </h2>
           <p className="text-white/65 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-            Let AQUABOR help you find the right groundwater solution for your project. Our expert team is ready to assist you.
+            Whether you need a water well, an earthing system, core cutting or dewatering, our team is ready to help. Share your requirement and get a free quote.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -65,22 +66,37 @@ export function CTASection() {
               className="btn btn-accent text-base px-9 py-4"
               id="cta-contact-team"
             >
-              Contact Our Team
+              Get a Free Quote
               <ArrowRight size={18} />
             </Link>
-            <a
-              href="tel:+971000000000"
-              className="btn btn-outline text-base px-9 py-4"
-              id="cta-phone"
-            >
-              <Phone size={18} />
-              Call Us Now
-            </a>
+            {contact.phone && (
+              <a
+                href={`tel:${contact.phone}`}
+                className="btn btn-outline text-base px-9 py-4"
+                id="cta-phone"
+              >
+                <Phone size={18} />
+                Call Now
+              </a>
+            )}
+            {contact.whatsappUrl && (
+              <a
+                href={contact.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn text-base px-9 py-4 font-semibold text-white transition-all hover:opacity-90"
+                style={{ background: "#25D366" }}
+                id="cta-whatsapp"
+              >
+                <MessageCircle size={18} />
+                Chat on WhatsApp
+              </a>
+            )}
           </div>
 
           {/* Trust line */}
           <p className="text-white/40 text-sm mt-8">
-            Based in Dubai, UAE · Serving the GCC Region
+            Based in Dubai, UAE · Serving Dubai &amp; All Emirates
           </p>
         </FadeIn>
       </div>

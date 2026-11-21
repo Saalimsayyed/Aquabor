@@ -4,6 +4,7 @@ import {
   FileText,
   Settings,
   CheckCircle,
+  FlaskConical,
 } from "lucide-react";
 import { workProcess } from "@/data/equipment";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -14,7 +15,7 @@ const iconMap: Record<string, React.ElementType> = {
   MapPin,
   FileText,
   Drill: Settings,
-  Settings,
+  Settings: FlaskConical,
   CheckCircle,
 };
 
@@ -29,8 +30,8 @@ export function WorkProcess() {
       <div className="container">
         <SectionHeader
           label="How We Work"
-          title="Our Proven Drilling Process"
-          subtitle="Every AQUABOR project follows a structured, transparent process designed to deliver exceptional results on time and within specification."
+          title="Our Simple 6-Step Work Process"
+          subtitle="We keep every project clear and well planned."
         />
 
         <StaggerContainer className="relative max-w-4xl mx-auto">

@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import { CTASection } from "@/components/sections/CTASection";
 import ProjectsClient from "./ProjectsClient";
 
-export const metadata: Metadata = {
-  title: "Our Projects – Water Well Drilling Portfolio Dubai, UAE | AQUABOR",
+export const metadata = createPageMetadata({
+  path: "/projects",
+  title: "Drilling & Earthing Project Examples in the UAE",
   description:
-    "View AQUABOR's water well drilling and borehole construction projects across Dubai and the UAE. Representative portfolio demonstrating our expertise in groundwater solutions.",
-  alternates: { canonical: "/projects" },
-};
+    "Explore representative examples of water well drilling, earth pit installation, substation earthing and construction dewatering in Dubai and across the UAE.",
+});
 
 export default function ProjectsPage() {
   return (

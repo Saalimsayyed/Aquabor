@@ -1,37 +1,38 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
 import { ContactForm } from "./ContactForm";
+import { contact } from "@/lib/contact";
 
-export const metadata: Metadata = {
-  title: "Contact AQUABOR – Water Well Drilling Dubai | Free Quote UAE",
+export const metadata = createPageMetadata({
+  path: "/contact",
+  title: "Contact Our Dubai Drilling Team for a Quote",
   description:
-    "Contact AQUABOR for professional water well drilling and borehole services in Dubai, UAE. Request a free quote for your groundwater project. Get in touch with our expert team.",
-  alternates: { canonical: "/contact" },
-};
+    "Request a quote for water well drilling, electrical earthing, concrete core cutting or dewatering in Dubai and across the UAE.",
+});
 
 const contactInfo = [
   {
     icon: MapPin,
     label: "Office Location",
-    value: "Dubai, United Arab Emirates",
-    note: "[Address to be updated]",
+    value: contact.officeAddress ?? "Dubai, United Arab Emirates",
+    note: undefined,
     href: undefined,
   },
   {
     icon: Phone,
     label: "Phone Number",
-    value: "+971 XX XXX XXXX",
-    note: "[Placeholder – update with real number]",
-    href: "tel:+971000000000",
+    value: contact.phone,
+    note: undefined,
+    href: contact.phone ? `tel:${contact.phone}` : undefined,
   },
   {
     icon: Mail,
     label: "Email Address",
-    value: "info@aquabor.ae",
-    note: "[Placeholder – update with real email]",
-    href: "mailto:info@aquabor.ae",
+    value: contact.email,
+    note: undefined,
+    href: contact.email ? `mailto:${contact.email}` : undefined,
   },
   {
     icon: Clock,
@@ -85,7 +86,7 @@ export default function ContactPage() {
                 </h2>
 
                 <StaggerContainer className="space-y-4" staggerDelay={0.08}>
-                  {contactInfo.map((item) => {
+                  {contactInfo.filter((item) => item.value).map((item) => {
                     const Icon = item.icon;
                     return (
                       <StaggerItem key={item.label}>
@@ -121,7 +122,7 @@ export default function ContactPage() {
                                 {item.value}
                               </p>
                             )}
-                            <p className="text-xs text-[var(--text-muted)] mt-0.5">{item.note}</p>
+                            {item.note && <p className="text-xs text-[var(--text-muted)] mt-0.5">{item.note}</p>}
                           </div>
                         </div>
                       </StaggerItem>
@@ -130,9 +131,9 @@ export default function ContactPage() {
                 </StaggerContainer>
 
                 {/* WhatsApp CTA */}
-                <div className="mt-6">
+                {contact.whatsappUrl && <div className="mt-6">
                   <a
-                    href="https://wa.me/971000000000"
+                    href={contact.whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-3 w-full py-3.5 rounded-2xl font-semibold text-white transition-all hover:scale-105"
@@ -143,23 +144,7 @@ export default function ContactPage() {
                     <MessageCircle size={20} aria-hidden="true" />
                     Chat on WhatsApp
                   </a>
-                </div>
-
-                {/* Map placeholder */}
-                <div className="mt-6 rounded-2xl overflow-hidden" style={{ border: "1px solid var(--border)" }}>
-                  <div
-                    className="h-48 flex items-center justify-center"
-                    style={{ background: "var(--light-bg)" }}
-                    aria-label="Map placeholder – Google Maps embed to be configured"
-                    role="img"
-                  >
-                    <div className="text-center">
-                      <MapPin size={36} className="mx-auto mb-2" style={{ color: "var(--text-muted)" }} aria-hidden="true" />
-                      <p className="text-sm text-[var(--text-muted)]">Dubai, UAE</p>
-                      <p className="text-xs text-[var(--text-muted)] mt-0.5">[Google Maps embed to be configured]</p>
-                    </div>
-                  </div>
-                </div>
+                </div>}
               </FadeIn>
             </aside>
 
@@ -173,10 +158,22 @@ export default function ContactPage() {
                   <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">
                     Request a Free Quote
                   </h2>
-                  <p className="text-sm text-[var(--text-secondary)] mb-7 leading-relaxed">
-                    Fill in the form below and our team will respond within 1–2 business days with a tailored consultation.
-                  </p>
-                  <ContactForm />
+                  {contact.formUrl ? (
+                    <>
+                      <p className="text-sm text-[var(--text-secondary)] mb-7 leading-relaxed">
+                        Tell us about your project to request a consultation and quote.
+                      </p>
+                      <ContactForm endpoint={contact.formUrl} />
+                    </>
+                  ) : (
+                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                      {contact.email
+                        ? <a className="underline" href={`mailto:${contact.email}`}>Email us to request a quote.</a>
+                        : contact.phone || contact.whatsappUrl
+                          ? "Use the contact details on this page to request a quote."
+                          : "Online enquiries are currently unavailable."}
+                    </p>
+                  )}
                 </div>
               </FadeIn>
             </div>
@@ -194,13 +191,13 @@ export default function ContactPage() {
           <FadeIn>
             <div className="text-center max-w-2xl mx-auto">
               <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-3">
-                Serving Dubai & the GCC Region
+                Serving Dubai & the UAE
               </h2>
               <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
-                AQUABOR operates across Dubai, Abu Dhabi, Sharjah, and the wider UAE and GCC region. Contact us with your project location and we will confirm coverage.
+                Send your site location, required service and any drawings or dimensions you have. We can confirm UAE coverage and identify what we need for a quote.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
-                {["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "UAE", "Saudi Arabia", "Qatar", "Kuwait"].map((area) => (
+                {["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain"].map((area) => (
                   <span
                     key={area}
                     className="px-4 py-2 rounded-full text-sm font-medium"

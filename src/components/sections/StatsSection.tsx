@@ -1,12 +1,12 @@
-import { Drill, Settings, CheckCircle, Users } from "lucide-react";
+import { Users, Drill, CheckCircle, Shield } from "lucide-react";
 import { stats } from "@/data/equipment";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
 
 const iconMap: Record<string, React.ElementType> = {
-  Drill,
-  Settings,
-  CheckCircle,
   Users,
+  Drill,
+  CheckCircle,
+  Shield,
 };
 
 export function StatsSection() {
@@ -14,7 +14,7 @@ export function StatsSection() {
     <section
       className="relative py-20 overflow-hidden"
       style={{ background: "linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-bg-2) 100%)" }}
-      aria-label="Company highlights"
+      aria-label="What makes AQUABOR different"
       id="stats"
     >
       {/* Radial glow */}
@@ -31,7 +31,7 @@ export function StatsSection() {
           <div className="text-center mb-12">
             <span className="section-label">Why AQUABOR</span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">
-              What Sets Us Apart
+              What Makes AQUABOR Different
             </h2>
           </div>
         </FadeIn>

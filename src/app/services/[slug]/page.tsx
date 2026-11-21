@@ -1,4 +1,6 @@
+import { contact } from "@/lib/contact";
 import type { Metadata } from "next";
+import { createPageMetadata, organizationSchema, serviceAreas, siteUrl } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +8,7 @@ import { CheckCircle2, ArrowRight, ChevronRight } from "lucide-react";
 import { services, getServiceBySlug } from "@/data/services";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { CTASection } from "@/components/sections/CTASection";
-import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
+import { FadeIn } from "@/components/animations/FadeIn";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -17,16 +19,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const service = getServiceBySlug(slug);
   if (!service) return { title: "Service Not Found" };
 
-  return {
-    title: `${service.title} – Water Well Drilling Services Dubai, UAE`,
+  return createPageMetadata({
+    path: "/services/" + slug,
+    title: service.title,
     description: service.shortDescription,
-    alternates: { canonical: `/services/${slug}` },
-    openGraph: {
-      title: `${service.title} | AQUABOR Dubai`,
-      description: service.shortDescription,
-      images: [{ url: service.image, alt: service.title }],
-    },
-  };
+    image: { url: service.image, alt: service.imageAlt },
+  });
 }
 
 export function generateStaticParams() {
@@ -45,12 +43,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     "@type": "Service",
     name: service.title,
     description: service.description,
-    provider: {
-      "@type": "Organization",
-      name: "AQUABOR",
-      url: "https://aquabor.ae",
-    },
-    areaServed: { "@type": "Country", name: "United Arab Emirates" },
+    url: siteUrl + "/services/" + slug,
+    image: new URL(service.image, siteUrl).href,
+    provider: { "@id": organizationSchema["@id"] },
+    areaServed: serviceAreas,
     serviceType: service.title,
   };
 
@@ -66,7 +62,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         <div className="absolute inset-0 overflow-hidden">
           <Image
             src={service.image}
-            alt={`${service.title} services in Dubai, UAE`}
+            alt=""
             fill
             className="object-cover opacity-30"
             sizes="100vw"
@@ -111,7 +107,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   <div className="relative w-full h-full" style={{ aspectRatio: "16/9" }}>
                     <Image
                       src={service.image}
-                      alt={`${service.title} by AQUABOR in Dubai`}
+                      alt={service.imageAlt}
                       fill
                       className="object-cover"
                       sizes="(max-width: 1024px) 100vw, 66vw"
@@ -260,21 +256,24 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     Contact AQUABOR
                   </h3>
                   <p className="text-white/60 text-xs leading-relaxed mb-4">
-                    Based in Dubai, UAE. Serving the UAE and GCC region.
+                    Based in Dubai and serving projects across the UAE.
                   </p>
-                  <a
-                    href="tel:+971000000000"
-                    className="text-[var(--accent)] text-sm font-semibold hover:underline"
-                  >
-                    +971 XX XXX XXXX
-                  </a>
-                  <br />
-                  <a
-                    href="mailto:info@aquabor.ae"
-                    className="text-[var(--accent)] text-sm hover:underline"
-                  >
-                    info@aquabor.ae
-                  </a>
+                  {contact.phone && (
+                    <a
+                      href={`tel:${contact.phone}`}
+                      className="block text-[var(--accent)] text-sm font-semibold hover:underline"
+                    >
+                      {contact.phone}
+                    </a>
+                  )}
+                  {contact.email && (
+                    <a
+                      href={`mailto:${contact.email}`}
+                      className="text-[var(--accent)] text-sm hover:underline"
+                    >
+                      {contact.email}
+                    </a>
+                  )}
                 </div>
               </FadeIn>
             </aside>

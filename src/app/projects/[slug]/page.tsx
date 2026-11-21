@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Calendar, ArrowLeft, ArrowRight, Tag } from "lucide-react";
-import { projects, getProjectBySlug } from "@/data/projects";
+import { projects, getProjectBySlug, projectImageAlt } from "@/data/projects";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { CTASection } from "@/components/sections/CTASection";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
@@ -17,16 +18,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Project Not Found" };
 
-  return {
-    title: `${project.title} – ${project.category} Project | AQUABOR Dubai`,
-    description: project.description,
-    alternates: { canonical: `/projects/${slug}` },
-    openGraph: {
-      title: project.title,
-      description: project.description,
-      images: [{ url: project.image, alt: project.title }],
-    },
-  };
+  return createPageMetadata({
+    path: "/projects/" + slug,
+    title: project.title + " Project Example in " + project.location.split(",")[0],
+    description: "Representative project example. " + project.description,
+    image: { url: project.image, alt: projectImageAlt[project.image] },
+  });
 }
 
 export function generateStaticParams() {
@@ -47,7 +44,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <div className="absolute inset-0">
           <Image
             src={project.image}
-            alt={`${project.title} – ${project.category} project by AQUABOR in ${project.location}`}
+            alt={projectImageAlt[project.image]}
             fill
             className="object-cover"
             sizes="100vw"
@@ -127,7 +124,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 >
                   <span className="text-xl">ℹ️</span>
                   <p className="text-sm" style={{ color: "#b45309" }}>
-                    <strong>Demo Project:</strong> This is a representative project demonstrating AQUABOR's service capabilities. Actual project details will be published upon client authorization.
+                    <strong>Demo Project:</strong> This is a representative project demonstrating AQUABOR&apos;s service capabilities. Actual project details will be published upon client authorization.
                   </p>
                 </div>
 
@@ -169,7 +166,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                         <div className="relative rounded-xl overflow-hidden img-zoom" style={{ aspectRatio: "4/3" }}>
                           <Image
                             src={img}
-                            alt={`${project.title} project image ${i + 1}`}
+                            alt={projectImageAlt[img]}
                             fill
                             className="object-cover"
                             sizes="(max-width: 640px) 100vw, 50vw"
@@ -265,7 +262,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   >
                     <Image
                       src={p.image}
-                      alt={`${p.title} – ${p.category}`}
+                      alt={projectImageAlt[p.image]}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 33vw"

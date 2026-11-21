@@ -1,28 +1,58 @@
 import type { Metadata } from "next";
+import { contact } from "@/lib/contact";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aquabor.ae";
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://aquabor.ae").replace(/\/+$/, "");
+
+const defaultTitle = "Water Well Drilling & Earthing Contractor Dubai";
+const defaultDescription =
+  "AQUABOR provides water well drilling, borewell drilling, electrical earthing, concrete core cutting and dewatering in Dubai and across the UAE.";
+const defaultImage = {
+  url: "/images/water-well-drilling-rig-uae.webp",
+  width: 1600,
+  height: 1613,
+  alt: "Truck-mounted water well drilling rig and compressor truck at a drilling site",
+};
+
+interface PageMetadata {
+  path: string;
+  title?: string;
+  description?: string;
+  image?: { url: string; alt: string };
+}
+
+export function createPageMetadata({
+  path,
+  title = defaultTitle,
+  description = defaultDescription,
+  image = defaultImage,
+}: PageMetadata): Metadata {
+  const brandedTitle = title + " | AQUABOR";
+  return {
+    title: brandedTitle,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      locale: "en_AE",
+      siteName: "AQUABOR",
+      url: path,
+      title: brandedTitle,
+      description,
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: brandedTitle,
+      description,
+      images: [image],
+    },
+  };
+}
 
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: "AQUABOR – Water Well Drilling Dubai | Borehole Drilling UAE",
-    template: "%s | AQUABOR Water Well Drilling",
-  },
-  description:
-    "AQUABOR is a professional water well drilling and borehole construction company based in Dubai, UAE. We provide reliable groundwater solutions, well development and drilling services across the GCC region.",
-  keywords: [
-    "water well drilling Dubai",
-    "borehole drilling UAE",
-    "water well drilling company Dubai",
-    "groundwater solutions UAE",
-    "borehole contractors Dubai",
-    "water well drilling services UAE",
-    "well drilling contractor Dubai",
-    "groundwater exploration UAE",
-  ],
-  authors: [{ name: "AQUABOR" }],
-  creator: "AQUABOR",
-  publisher: "AQUABOR",
+  title: defaultTitle + " | AQUABOR",
+  description: defaultDescription,
   robots: {
     index: true,
     follow: true,
@@ -34,56 +64,30 @@ export const defaultMetadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  openGraph: {
-    type: "website",
-    locale: "en_AE",
-    url: siteUrl,
-    siteName: "AQUABOR – Water Well Drilling Dubai",
-    title: "AQUABOR – Water Well Drilling Dubai | Borehole Drilling UAE",
-    description:
-      "Professional water well drilling, borehole construction and groundwater solutions in Dubai, UAE. Serving the GCC region with precision drilling services.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "AQUABOR Water Well Drilling Dubai",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "AQUABOR – Water Well Drilling Dubai",
-    description:
-      "Professional water well drilling and borehole construction services in Dubai, UAE.",
-    images: ["/og-image.jpg"],
-  },
-  alternates: {
-    canonical: siteUrl,
-  },
 };
+
+export const serviceAreas = [
+  { "@type": "City", name: "Dubai" },
+  { "@type": "Country", name: "United Arab Emirates" },
+];
 
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": siteUrl + "/#organization",
   name: "AQUABOR",
-  description:
-    "Professional water well drilling, borehole construction and groundwater solutions company based in Dubai, UAE.",
+  description: defaultDescription,
   url: siteUrl,
-  logo: `${siteUrl}/logo.png`,
+  logo: siteUrl + "/logo.png",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Dubai",
     addressCountry: "AE",
     addressRegion: "Dubai",
   },
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "customer service",
-    areaServed: ["AE", "SA", "QA", "KW", "BH", "OM"],
-    availableLanguage: ["English", "Arabic"],
-  },
-  sameAs: [],
+  areaServed: serviceAreas,
+  ...(contact.phone && { telephone: contact.phone }),
+  ...(contact.email && { email: contact.email }),
 };
 
 export const websiteSchema = {
@@ -91,12 +95,6 @@ export const websiteSchema = {
   "@type": "WebSite",
   name: "AQUABOR",
   url: siteUrl,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${siteUrl}/search?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
+  inLanguage: "en-AE",
+  publisher: { "@id": organizationSchema["@id"] },
 };

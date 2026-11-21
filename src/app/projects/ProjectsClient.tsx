@@ -42,7 +42,7 @@ export default function ProjectsClient() {
               </span>
             </h1>
             <p className="text-white/65 text-lg max-w-2xl leading-relaxed">
-              Explore representative projects demonstrating AQUABOR's expertise in water well drilling and groundwater solutions across the UAE.
+              Explore representative projects demonstrating AQUABOR&apos;s expertise in water well drilling and groundwater solutions across the UAE.
             </p>
           </FadeIn>
         </div>
@@ -66,7 +66,7 @@ export default function ProjectsClient() {
           >
             <span className="text-xl" aria-hidden="true">ℹ️</span>
             <p className="text-sm" style={{ color: "#b45309" }}>
-              <strong>Note:</strong> These are demonstration projects illustrating AQUABOR's service capabilities. All projects are clearly marked as demo content. Actual completed project information will be published upon client authorization.
+              <strong>Note:</strong> These are demonstration projects illustrating AQUABOR&apos;s service capabilities. All projects are clearly marked as demo content. Actual completed project information will be published upon client authorization.
             </p>
           </div>
 

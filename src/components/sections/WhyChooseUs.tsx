@@ -34,8 +34,8 @@ export function WhyChooseUs() {
           <div>
             <SectionHeader
               label="Why Choose Us"
-              title="Your Trusted Partner for Groundwater Solutions"
-              subtitle="AQUABOR combines technical excellence, modern equipment and a commitment to client satisfaction on every project."
+              title="Why Choose AQUABOR as Your Drilling Contractor in UAE?"
+              subtitle="Our work is simple: do it safe, do it right and finish on time. Here is what you get when you work with us."
               align="left"
             />
 
@@ -73,8 +73,8 @@ export function WhyChooseUs() {
               {/* Main image */}
               <div className="absolute inset-0 rounded-2xl overflow-hidden img-zoom shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=85"
-                  alt="AQUABOR drilling operations showing safety and professionalism"
+                  src="/images/electrical-earthing-drilling-dubai-auger.webp"
+                  alt="Excavator-mounted auger set up for earthing drilling"
                   fill
                   className="object-cover"
                   sizes="50vw"
@@ -90,10 +90,10 @@ export function WhyChooseUs() {
               {/* Floating stats card */}
               <div
                 className="absolute -left-10 bottom-12 rounded-2xl p-5 shadow-2xl"
-                style={{ background: "white", minWidth: 200 }}
+                style={{ background: "white", minWidth: 220 }}
               >
                 <p
-                  className="text-3xl font-black mb-0.5"
+                  className="text-2xl font-black mb-0.5"
                   style={{
                     background: "linear-gradient(135deg, var(--primary), var(--accent))",
                     WebkitBackgroundClip: "text",
@@ -104,7 +104,7 @@ export function WhyChooseUs() {
                   UAE-Based
                 </p>
                 <p className="text-xs text-[var(--text-muted)] font-medium">
-                  Operating Across the GCC Region
+                  Serving Dubai &amp; Other Emirates
                 </p>
               </div>
 
@@ -115,7 +115,7 @@ export function WhyChooseUs() {
               >
                 <Shield size={28} className="text-white mb-1" />
                 <p className="text-white font-bold text-sm">Safety First</p>
-                <p className="text-white/70 text-xs">Zero-Incident Target</p>
+                <p className="text-white/70 text-xs">On Every Project</p>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { equipmentCategories } from "@/data/equipment";
@@ -7,12 +7,13 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CTASection } from "@/components/sections/CTASection";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
 
-export const metadata: Metadata = {
-  title: "Drilling Equipment – Water Well Drilling Rigs & Tools | AQUABOR Dubai",
+export const metadata = createPageMetadata({
+  path: "/equipment",
+  title: "Drilling Rigs & Core Cutting Equipment in Dubai",
   description:
-    "Explore AQUABOR's modern fleet of water well drilling rigs, DTH hammers, air compressors and drilling tools. Professional drilling equipment for UAE projects.",
-  alternates: { canonical: "/equipment" },
-};
+    "See the truck-mounted drilling rigs, augers, earth resistance testers, diamond core drills and dewatering equipment AQUABOR uses across the UAE.",
+  image: { url: "/images/core-equipment-stock.webp", alt: "Stand-mounted diamond core drill on a concrete slab" },
+});
 
 export default function EquipmentPage() {
   return (
@@ -39,7 +40,7 @@ export default function EquipmentPage() {
               </span>
             </h1>
             <p className="text-white/65 text-lg max-w-2xl leading-relaxed">
-              AQUABOR operates a modern, well-maintained fleet of drilling rigs, compressors and ancillary equipment designed for UAE's diverse geological conditions.
+              Our Dubai team uses truck-mounted rigs for water wells, excavator augers and testers for earthing, diamond core drills for concrete and pumps for construction dewatering.
             </p>
           </FadeIn>
         </div>
@@ -55,7 +56,7 @@ export default function EquipmentPage() {
           />
 
           <div className="space-y-16">
-            {equipmentCategories.map((category, catIndex) => (
+            {equipmentCategories.map((category) => (
               <div key={category.id}>
                 <FadeIn>
                   <h2
@@ -85,7 +86,7 @@ export default function EquipmentPage() {
                         <div className="img-zoom relative aspect-[4/3]">
                           <Image
                             src={item.image}
-                            alt={`${item.name} – drilling equipment used by AQUABOR in UAE`}
+                            alt={item.imageAlt}
                             fill
                             className="object-cover"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -149,7 +150,7 @@ export default function EquipmentPage() {
             <FadeIn>
               <div className="relative rounded-2xl overflow-hidden img-zoom shadow-xl" style={{ aspectRatio: "4/3" }}>
                 <Image
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85"
+                  src="/images/borewell-drilling-dubai-rig-truck.webp"
                   alt="AQUABOR drilling rig operating in UAE desert environment"
                   fill
                   className="object-cover"
@@ -164,10 +165,10 @@ export default function EquipmentPage() {
               </h2>
               <div className="divider" />
               <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
-                Every piece of drilling equipment in AQUABOR's fleet is subject to rigorous preventive maintenance schedules. We invest in modern equipment and keep it in peak operating condition to ensure reliability, safety and performance on every project site.
+                Every piece of drilling equipment in AQUABOR&apos;s fleet is subject to rigorous preventive maintenance schedules. We invest in modern equipment and keep it in peak operating condition to ensure reliability, safety and performance on every project site.
               </p>
               <p className="text-[var(--text-secondary)] leading-relaxed">
-                Our equipment operators hold the relevant certifications and training required to operate drilling rigs safely and efficiently in UAE's varied geological and environmental conditions.
+                Our equipment operators hold the relevant certifications and training required to operate drilling rigs safely and efficiently in UAE&apos;s varied geological and environmental conditions.
               </p>
             </FadeIn>
           </div>

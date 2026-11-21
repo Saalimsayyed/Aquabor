@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
+import { siteUrl } from "@/lib/metadata";
 
 interface BreadcrumbItem {
   label: string;
@@ -20,12 +21,12 @@ export function Breadcrumb({ items, light = true }: BreadcrumbProps) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
       ...items.map((item, i) => ({
         "@type": "ListItem",
         position: i + 2,
         name: item.label,
-        item: item.href || "#",
+        ...(item.href && { item: new URL(item.href, siteUrl).href }),
       })),
     ],
   };

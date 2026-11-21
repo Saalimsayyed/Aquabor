@@ -4,12 +4,13 @@ import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/animations/FadeIn";
 
 const highlights = [
-  "Expert hydrogeological assessment",
-  "Modern drilling rigs and equipment",
-  "Safety-focused project execution",
-  "Full regulatory compliance (UAE)",
-  "Transparent communication throughout",
-  "Reliable on-time delivery",
+  "Honest advice in simple language",
+  "Skilled and trained crew",
+  "Own rigs, excavators and equipment",
+  "Safety-first work on every site",
+  "Work as per UAE rules and consultant requirements",
+  "Quick response and on-time completion",
+  "Proper reports and documents at handover",
 ];
 
 export function AboutSection() {
@@ -26,8 +27,8 @@ export function AboutSection() {
           <FadeIn direction="right" className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl img-zoom aspect-[4/3]">
               <Image
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=85"
-                alt="AQUABOR professional drilling team with drilling equipment in UAE"
+                src="/images/earthing-drilling-excavator-uae.webp"
+                alt="Excavator-mounted auger beside an excavation"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -38,7 +39,7 @@ export function AboutSection() {
                 style={{ backdropFilter: "blur(16px)" }}
               >
                 <p className="text-white font-bold text-lg leading-none">Dubai, UAE</p>
-                <p className="text-white/70 text-sm mt-1">Based & Operating GCC-Wide</p>
+                <p className="text-white/70 text-sm mt-1">Based &amp; Operating UAE-Wide</p>
               </div>
             </div>
 
@@ -49,7 +50,7 @@ export function AboutSection() {
             >
               <p className="text-white/80 text-xs font-medium uppercase tracking-widest">Expertise</p>
               <p className="text-white font-bold text-base mt-0.5">
-                Groundwater Solutions
+                Drilling &amp; Earthing
               </p>
             </div>
           </FadeIn>
@@ -61,7 +62,7 @@ export function AboutSection() {
               className="text-3xl md:text-4xl font-bold leading-tight mt-3 mb-4"
               style={{ color: "var(--text-primary)" }}
             >
-              Professional Water Well Drilling in{" "}
+              Professional Drilling &amp; Earthing Contractor in{" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, var(--primary), var(--accent))",
@@ -70,15 +71,18 @@ export function AboutSection() {
                   backgroundClip: "text",
                 }}
               >
-                Dubai & UAE
+                Dubai, UAE
               </span>
             </h2>
             <div className="divider" />
             <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
-              AQUABOR is a premier water well drilling and borehole construction company operating in Dubai and across the UAE. We combine advanced drilling technology with deep hydrogeological expertise to deliver groundwater solutions that meet the highest standards of quality, safety and reliability.
+              AQUABOR is a drilling and earthing contractor based in Dubai. We work with homeowners, farm owners, builders, consultants and industrial companies across the UAE.
+            </p>
+            <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
+              Our main work is water well drilling in the UAE, borewell drilling in Dubai and electrical earthing. We also provide core cutting and dewatering services for construction projects.
             </p>
             <p className="text-[var(--text-secondary)] leading-relaxed mb-7">
-              From initial site assessment to final project handover, our experienced team manages every aspect of your drilling project with professionalism and precision, ensuring you receive a reliable, long-term water supply solution tailored to your specific needs.
+              We understand UAE ground conditions very well. Sand, rock, hard layers and high water table all need different methods. Before we start, we visit the site, check the ground and suggest the best way to do the job. After the work, we give you test results and documents.
             </p>
 
             {/* Highlights grid */}

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
@@ -8,12 +8,12 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CTASection } from "@/components/sections/CTASection";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
 
-export const metadata: Metadata = {
-  title: "Our Services – Water Well Drilling & Groundwater Solutions Dubai",
+export const metadata = createPageMetadata({
+  path: "/services",
+  title: "Drilling, Earthing & Core Cutting Services in Dubai",
   description:
-    "Explore AQUABOR's comprehensive water well drilling, borehole drilling, groundwater exploration and well development services in Dubai and UAE.",
-  alternates: { canonical: "/services" },
-};
+    "Explore water well and borehole drilling, earth pit installation, concrete core cutting and construction dewatering services in Dubai and across the UAE.",
+});
 
 export default function ServicesPage() {
   return (
@@ -40,7 +40,7 @@ export default function ServicesPage() {
               </span>
             </h1>
             <p className="text-white/65 text-lg max-w-2xl leading-relaxed">
-              From water well drilling to complete groundwater management, AQUABOR delivers expert solutions tailored to your project requirements.
+              AQUABOR handles water well drilling, electrical earthing, concrete core cutting and groundwater dewatering for projects in Dubai and across the UAE.
             </p>
           </FadeIn>
         </div>
@@ -51,7 +51,7 @@ export default function ServicesPage() {
         <div className="container">
           <SectionHeader
             label="What We Offer"
-            title="Comprehensive Drilling & Groundwater Services"
+            title="Drilling, Earthing, Core Cutting & Dewatering"
             subtitle="Every service is delivered by experienced professionals using modern equipment and proven methodologies."
           />
 
@@ -71,7 +71,7 @@ export default function ServicesPage() {
                   >
                     <Image
                       src={service.image}
-                      alt={`${service.title} services by AQUABOR in Dubai, UAE`}
+                      alt={service.imageAlt}
                       fill
                       className="object-cover"
                       sizes="(max-width: 1024px) 100vw, 50vw"

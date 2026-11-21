@@ -5,6 +5,54 @@ import { services } from "@/data/services";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
 
+// Service icons mapping by slug (unused, icons rendered inline)
+
+function ServiceIcon({ slug }: { slug: string }) {
+  // Drilling icon (default)
+  const drillingIcon = (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="3" />
+      <line x1="12" y1="2" x2="12" y2="5" />
+      <line x1="12" y1="19" x2="12" y2="22" />
+      <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" />
+      <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" />
+      <line x1="2" y1="12" x2="5" y2="12" />
+      <line x1="19" y1="12" x2="22" y2="12" />
+      <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" />
+      <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" />
+    </svg>
+  );
+
+  const earthingIcon = (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+      <path d="M2 17l10 5 10-5" />
+      <path d="M2 12l10 5 10-5" />
+    </svg>
+  );
+
+  const cuttingIcon = (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="6" cy="6" r="3" />
+      <circle cx="6" cy="18" r="3" />
+      <line x1="20" y1="4" x2="8.12" y2="15.88" />
+      <line x1="14.47" y1="14.48" x2="20" y2="20" />
+      <line x1="8.12" y1="8.12" x2="12" y2="12" />
+    </svg>
+  );
+
+  const dewateringIcon = (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+    </svg>
+  );
+
+  if (slug.includes("earthing") || slug.includes("substation")) return earthingIcon;
+  if (slug.includes("core") || slug.includes("slab")) return cuttingIcon;
+  if (slug.includes("dewatering")) return dewateringIcon;
+  return drillingIcon;
+}
+
 export function ServicesSection() {
   return (
     <section
@@ -15,8 +63,8 @@ export function ServicesSection() {
       <div className="container">
         <SectionHeader
           label="What We Do"
-          title="Comprehensive Drilling & Groundwater Services"
-          subtitle="From water well drilling to complete groundwater management, AQUABOR delivers expert solutions for every project requirement across Dubai and the UAE."
+          title="Our Drilling, Earthing & Core Cutting Services in UAE"
+          subtitle="AQUABOR offers complete drilling and site solutions in Dubai and across the UAE. Whether you need a water well, an earthing system, a hole in a concrete slab or a dry excavation, our team will guide you from the first call to the final handover."
         />
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
@@ -27,7 +75,7 @@ export function ServicesSection() {
                 <div className="img-zoom relative h-52 flex-shrink-0">
                   <Image
                     src={service.image}
-                    alt={`${service.title} – professional drilling service in UAE`}
+                    alt={service.imageAlt}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -49,17 +97,7 @@ export function ServicesSection() {
                     className="feature-icon mb-4 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-accent group-hover:text-white"
                     style={{ width: 44, height: 44 }}
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="3" />
-                      <line x1="12" y1="2" x2="12" y2="5" />
-                      <line x1="12" y1="19" x2="12" y2="22" />
-                      <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" />
-                      <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" />
-                      <line x1="2" y1="12" x2="5" y2="12" />
-                      <line x1="19" y1="12" x2="22" y2="12" />
-                      <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" />
-                      <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" />
-                    </svg>
+                    <ServiceIcon slug={service.slug} />
                   </div>
 
                   <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2 leading-snug">
